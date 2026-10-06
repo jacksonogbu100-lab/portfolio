@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naija Dishes — Gwarinpa & Jahi, Abuja</title>
+    <meta
+      name="description"
+      content="Naija Dishes in Gwarinpa and Jahi, Abuja. Soups, swallow, jollof, breakfast, and city delivery. WhatsApp 08186615084 or 09165623377."
+    />
+    <meta property="og:title" content="Naija Dishes — Premium natural taste" />
+    <meta
+      property="og:description"
+      content="Egusi, afang, jollof, and breakfast in Gwarinpa and Jahi. Order on WhatsApp."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Rowdies:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="topbar" id="topbar">
+      <a class="brand" href="#home">
+        <img class="brand-mark" src="assets/logo.jpg" alt="" width="42" height="42" />
+        <span class="brand-text">
+          <strong>Naija Dishes</strong>
+          <small>Gwarinpa · Jahi</small>
+        </span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav">
+        <a href="#place">Video</a>
+        <a href="#menu">Meals</a>
+        <a href="#specials">Specials</a>
+        <a href="#about">About</a>
+        <a href="#visit">Visit</a>
+        <a href="#order">Delivery</a>
+        <a href="#contact" class="nav-cta">WhatsApp</a>
+      </nav>
+      <button class="cart-btn" id="cart-open" aria-label="Open cart">
+        Cart
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </header>
+
+    <!-- CART DRAWER -->
+    <div class="cart-drawer" id="cart-drawer" hidden>
+      <div class="cart-backdrop" id="cart-close-bg"></div>
+      <aside class="cart-panel" role="dialog" aria-label="Food cart">
+        <div class="cart-head">
+          <h2>Your cart</h2>
+          <button class="icon-close" id="cart-close" aria-label="Close cart">×</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-foot">
+          <div class="cart-total">
+            <span>Total</span>
+            <strong id="cart-total">₦0</strong>
+          </div>
+          <label class="cart-branch">Send order to
+            <select id="cart-branch"></select>
+          </label>
+          <button class="btn btn-primary btn-block" id="cart-whatsapp">Order via WhatsApp</button>
+          <button class="btn btn-ghost btn-block" id="cart-clear">Clear cart</button>
+        </div>
+      </aside>
+    </div>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="home">
+        <div class="hero-media reveal delay-1">
+          <img
+            src="assets/naija-dishes-meals.webp"
+            alt="Naija Dishes plates: egusi with swallow, jollof and chicken, vegetable soup, chicken stew, and fried rice"
+            width="1200"
+            height="1148"
+          />
+          <div class="hero-media-fade"></div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Gwarinpa & Jahi · Abuja</p>
+          <h1 class="reveal delay-1">
+            <span class="brand-line">Naija Dishes</span>
+            <span class="tag" id="tagline">Local soul. World plate.</span>
+          </h1>
+          <p class="lead reveal delay-2" id="lead"></p>
+          <div class="hero-actions reveal delay-3">
+            <a class="btn btn-primary" href="#order">Order delivery</a>
+            <a class="btn btn-ghost" href="#menu">View menu</a>
+            <a class="btn btn-ghost" id="hero-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp Gwarinpa</a>
+            <a class="btn btn-ghost" id="hero-whatsapp-jahi" href="#" target="_blank" rel="noopener">WhatsApp Jahi</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLACE VIDEO -->
+      <section class="section place" id="place">
+        <div class="section-inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">See the place</p>
+              <h2>Inside Naija Dishes</h2>
+            </div>
+            <p class="muted">Walk through the Gwarinpa kitchen, the dining room, and the VIP seats — filmed by the restaurant.</p>
+          </div>
+          <div class="video-grid" id="place-videos"></div>
+        </div>
+      </section>
+
+      <!-- DELIVERY -->
+      <section class="chowdeck-band" id="order">
+        <div class="section-inner order-layout">
+          <div class="chowdeck-copy">
+            <p class="eyebrow">City delivery</p>
+            <h2>Delivered anywhere in Abuja</h2>
+            <p>
+              Send the order to Gwarinpa or Jahi. They cook for delivery, takeaway, and dine-in.
+              Meals already in your cart are included in the WhatsApp message.
+            </p>
+            <ul class="about-points">
+              <li>Gwarinpa · 0818 661 5084</li>
+              <li>Jahi · 0916 562 3377</li>
+              <li>Drop your estate, street, and what you want</li>
+            </ul>
+          </div>
+          <form class="order-card" id="order-form" novalidate>
+            <label>Name<input class="input" id="o-name" required placeholder="Your name" /></label>
+            <label>Phone<input class="input" id="o-phone" required placeholder="080…" /></label>
+            <label>Branch
+              <select class="input" id="o-branch"></select>
+            </label>
+            <label>How
+              <select class="input" id="o-type">
+                <option value="Delivery">Delivery</option>
+                <option value="Takeaway">Takeaway</option>
+                <option value="Dine-in">Dine-in</option>
+              </select>
+            </label>
+            <label class="span-2" id="o-address-wrap">Address in Abuja
+              <input class="input" id="o-address" placeholder="Estate, street, area" />
+            </label>
+            <label class="span-2">What should we cook?
+              <textarea class="input" id="o-note" rows="3" placeholder="Egusi and eba, jollof and chicken, tray for 10…"></textarea>
+            </label>
+            <p class="form-note span-2" id="order-note" hidden></p>
+            <button class="btn btn-primary span-2" type="submit">Send on WhatsApp</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SPECIALS -->
+      <section class="specials" id="specials">
+        <div class="section-inner">
+          <p class="eyebrow">Tonight on the pass</p>
+          <h2>Today’s specials</h2>
+          <div class="special-row" id="specials-row"></div>
+        </div>
+      </section>
+
+      <!-- MENU -->
+      <section class="section" id="menu">
+        <div class="section-inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">What we sell</p>
+              <h2>Meals on the board</h2>
+            </div>
+            <p class="muted">Soups, swallow, rice, breakfast, and parfait. Soup prices are without swallow — eba, wheat, and pounded yam are priced on their own.</p>
+          </div>
+
+          <figure class="meal-poster">
+            <img src="assets/naija-dishes-meals.webp" alt="Naija Dishes meals: egusi with swallow, jollof and chicken, vegetable soup, chicken stew, and fried rice" width="1200" height="1148" />
+            <figcaption>Breakfast, lunch, and dinner — Gwarinpa and Jahi.</figcaption>
+          </figure>
+
+          <div class="menu-featured" id="menu-featured"></div>
+
+          <div class="menu-grid">
+            <div>
+              <h3 class="menu-col-title">Soups & swallow</h3>
+              <div class="dish-list" id="local-dishes"></div>
+            </div>
+            <div>
+              <h3 class="menu-col-title">Rice, stew & breakfast</h3>
+              <div class="dish-list" id="world-dishes"></div>
+            </div>
+          </div>
+
+          <div class="drinks-head">
+            <p class="eyebrow">To drink</p>
+            <h3 class="menu-col-title">Tea & drinks</h3>
+          </div>
+          <div class="menu-grid drinks-grid">
+            <div>
+              <h3 class="menu-col-title drinks-sub">VIP teas</h3>
+              <div class="dish-list" id="soft-drinks"></div>
+            </div>
+            <div>
+              <h3 class="menu-col-title drinks-sub">Cold drinks</h3>
+              <div class="dish-list" id="local-drinks"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section about" id="about">
+        <div class="section-inner about-grid">
+          <div>
+            <p class="eyebrow">About us</p>
+            <h2>Premium natural taste</h2>
+            <p>
+              Naija Dishes cooks Nigerian meals for breakfast, lunch, and dinner at two Abuja
+              spots: H-Medix Plaza on 2nd Avenue, Gwarinpa, and Shafa Fueling Station in Jahi.
+            </p>
+            <p>
+              The board is soups and swallow, jollof and fried rice, chicken stew, beans with
+              egg, fruit parfait, and tea in the VIP section. Delivery runs anywhere in the city.
+            </p>
+            <ul class="about-points">
+              <li>Gwarinpa kitchen along Setraco Gate</li>
+              <li>Second spot at Shafa, Jahi</li>
+              <li>Dine in, takeaway, or WhatsApp delivery</li>
+            </ul>
+          </div>
+          <div class="about-card">
+            <div class="about-stat">
+              <strong>Two branches</strong>
+              <span>Gwarinpa and Jahi</span>
+            </div>
+            <div class="about-stat">
+              <strong>City delivery</strong>
+              <span>Anywhere in Abuja</span>
+            </div>
+            <div class="about-stat">
+              <strong>All day meals</strong>
+              <span>Breakfast, lunch, dinner</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEAL CLIPS -->
+      <section class="gallery" id="clips" aria-label="Meal videos">
+        <div class="section-inner">
+          <div class="gallery-head">
+            <p class="eyebrow">Watch the plate</p>
+            <h2>Meals on video</h2>
+          </div>
+          <div class="meal-stage">
+            <div class="video-frame meal-player">
+              <iframe
+                id="meal-player"
+                title="Soups"
+                src="https://www.tiktok.com/embed/v2/7677577295925726471"
+                loading="lazy"
+                allow="fullscreen; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="meal-picks" id="meal-picks"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISIT -->
+      <section class="section" id="visit">
+        <div class="section-inner visit-grid">
+          <div>
+            <p class="eyebrow">Find us</p>
+            <h2>Two spots in Abuja</h2>
+            <div class="branch-list" id="branches"></div>
+            <div class="hours" id="hours"></div>
+            <div class="visit-actions">
+              <a class="btn btn-primary" id="call-link" href="#">Call Gwarinpa</a>
+              <a class="btn btn-ghost" id="call-jahi" href="#">Call Jahi</a>
+              <a class="btn btn-ghost" href="#order">City delivery</a>
+              <a class="btn btn-ghost" id="visit-website" href="https://www.tiktok.com/@naija.dishes.ng" target="_blank" rel="noopener">TikTok</a>
+            </div>
+          </div>
+          <div class="map-frame">
+            <iframe
+              id="branch-map"
+              title="Map of Naija Dishes Gwarinpa"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=H-Medix%20Plaza%202nd%20Avenue%20Gwarinpa%20Abuja&z=16&output=embed"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ + CONTACT -->
+      <section class="section contact-section" id="contact">
+        <div class="section-inner contact-grid">
+          <div>
+            <p class="eyebrow">Good to know</p>
+            <h2>FAQ</h2>
+            <div class="faq" id="faq"></div>
+          </div>
+          <div class="contact-card">
+            <p class="eyebrow">Reservations & trays</p>
+            <h2>Talk to us</h2>
+            <form id="contact-form" novalidate>
+              <label>Name<input class="input" id="f-name" required placeholder="Your name" /></label>
+              <label>Phone<input class="input" id="f-phone" required placeholder="080…" /></label>
+              <label class="span-2">Branch
+                <select class="input" id="f-branch"></select>
+              </label>
+              <label>Date<input class="input" id="f-date" type="date" required /></label>
+              <label>Guests<input class="input" id="f-guests" type="number" min="1" max="40" value="2" required /></label>
+              <label class="span-2">Message<textarea class="input" id="f-msg" rows="3" placeholder="Table booking, tray order, allergy note…"></textarea></label>
+              <p class="form-note span-2" id="form-note" hidden></p>
+              <button class="btn btn-primary span-2" type="submit">Send request</button>
+            </form>
+            <p class="contact-alt">
+              <a id="wa-link" href="#" target="_blank" rel="noopener">WhatsApp Gwarinpa 0818 661 5084</a>
+              ·
+              <a id="wa-link-jahi" href="#" target="_blank" rel="noopener">WhatsApp Jahi 0916 562 3377</a>
+              ·
+              <a id="mail-link" href="#">email</a>
+              ·
+              <a id="contact-instagram" href="https://www.instagram.com/naija_dishes_ng/" target="_blank" rel="noopener">Instagram</a>
+              ·
+              <a id="contact-website" href="https://www.tiktok.com/@naija.dishes.ng" target="_blank" rel="noopener">TikTok</a>
+              ·
+              <a id="contact-x" href="https://x.com/NaijaDishesNG" target="_blank" rel="noopener">X</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <strong>Naija Dishes</strong>
+          <p>Gwarinpa & Jahi · Premium natural taste.</p>
+          <p>
+            WhatsApp
+            <a id="footer-wa" href="#" target="_blank" rel="noopener">0818 661 5084</a>
+            ·
+            <a id="footer-wa-jahi" href="#" target="_blank" rel="noopener">0916 562 3377</a>
+          </p>
+          <p>
+            <a id="footer-website" href="https://www.tiktok.com/@naija.dishes.ng" target="_blank" rel="noopener">TikTok</a>
+            ·
+            <a id="footer-ig" href="https://www.instagram.com/naija_dishes_ng/" target="_blank" rel="noopener">Instagram</a>
+            ·
+            <a id="footer-x" href="https://x.com/NaijaDishesNG" target="_blank" rel="noopener">X</a>
+          </p>
+        </div>
+        <div class="footer-meta">
+          <span>© <span id="year"></span> Naija Dishes</span>
+          <span>Delivery anywhere in Abuja</span>
+          <span>Abuja, Nigeria</span>
+        </div>
+      </div>
+    </footer>
+
+    <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener">WhatsApp order</a>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

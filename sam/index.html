@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>SAM Laundry Studio</title>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet"
+      />
+      <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+      <div id="print-area"></div>
+      <div class="loading" id="loading">
+        <div class="spin"></div>
+        <div class="spin-label">Loading data...</div>
+      </div>
+
+      <!-- ══ LOGIN ══ -->
+      <div id="login-screen">
+        <div class="login-bg">
+          <div class="login-blob b1"></div>
+          <div class="login-blob b2"></div>
+          <div class="login-blob b3"></div>
+        </div>
+        <div class="login-box">
+          <div class="login-logo">SAM</div>
+          <div class="login-tagline">Dry Cleaning Center</div>
+          <div class="login-kicker">Staff workspace</div>
+          <h1 class="login-title">Welcome back</h1>
+          <p class="login-copy">Sign in with your SAM staff credentials.</p>
+          <input
+            class="login-input"
+            id="li-email"
+            type="text"
+            placeholder="Username"
+            autocomplete="username"
+            onkeydown="if (event.key === 'Enter') doLogin();"
+          />
+          <input
+            class="login-input"
+            id="li-pass"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            onkeydown="if (event.key === 'Enter') doLogin();"
+          />
+          <button class="login-btn" id="li-btn" onclick="doLogin()">
+            Sign In →
+          </button>
+          <div class="login-err" id="li-err"></div>
+          <div class="login-hint">Username: SAM · Password: 123456</div>
+        </div>
+      </div>
+
+      <!-- ══ APP ══ -->
+      <div id="app" style="display: none">
+        <!-- TOP NAV -->
+        <nav class="topnav">
+          <a class="nav-brand" href="#">
+            <div class="nav-brand-icon">SAM</div>
+            <div class="nav-brand-name">LAUNDRY</div>
+          </a>
+          <div class="nav-links">
+            <div class="nav-link active" onclick="showPage('dashboard', this)">
+              <span class="nav-icon">⌂</span><span>Dashboard</span>
+            </div>
+            <div class="nav-link" onclick="showPage('orders', this)">
+              <span class="nav-icon">◫</span><span>Orders</span>
+            </div>
+            <div class="nav-link" onclick="showPage('billing', this)">
+              <span class="nav-icon">₦</span><span>Billing</span>
+            </div>
+            <div class="nav-link" onclick="showPage('employees', this)">
+              <span class="nav-icon">♙</span><span>Employees</span>
+            </div>
+            <div class="nav-link" onclick="showPage('inventory', this)">
+              <span class="nav-icon">◇</span><span>Inventory</span>
+            </div>
+            <div class="nav-link" onclick="showPage('customers', this)">
+              <span class="nav-icon">◎</span><span>Customers</span>
+            </div>
+            <div class="nav-link" onclick="showPage('pickup', this)">
+              <span class="nav-icon">↗</span><span>Pickup Portal</span>
+            </div>
+            <div class="nav-link" onclick="showPage('reports', this)">
+              <span class="nav-icon">↟</span><span>Reports</span>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="search-wrap">
+              <span style="color: var(--muted); font-size: 0.85rem">⌕</span
+              ><input type="text" placeholder="Search..." />
+            </div>
+            <button class="btn btn-lime btn-sm" onclick="openModal('newOrder')">
+              + New Order
+            </button>
+            <div
+              class="avatar"
+              id="user-av"
+              onclick="doLogout()"
+              title="Click to sign out"
+            >
+              ?
+            </div>
+          </div>
+        </nav>
+
+        <div class="main">
+          <!-- ══ DASHBOARD ══ -->
+          <div class="page active" id="page-dashboard">
+            <div class="dashboard-head">
+              <div>
+                <div class="eyebrow">Operations overview</div>
+                <h1>Good day, <span id="dashboard-user">Team</span>.</h1>
+                <p>Everything happening at SAM Laundry, in one place.</p>
+              </div>
+              <div class="date-card">
+                <span class="date-dot"></span>
+                <div>
+                  <strong id="current-date">Today</strong>
+                  <span id="current-time">--:--</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-bar">
+              <div class="hero-stat g1">
+                <div class="hs-label">Total Orders</div>
+                <div class="hs-value" id="s-orders">—</div>
+                <div class="hs-sub">In system</div>
+              </div>
+              <div class="hero-stat g2">
+                <div class="hs-label">Active</div>
+                <div class="hs-value" id="s-active">—</div>
+                <div class="hs-sub">Pending + Processing</div>
+              </div>
+              <div class="hero-stat g3">
+                <div class="hs-label">Unpaid Bills</div>
+                <div class="hs-value" id="s-unpaid">—</div>
+                <div class="hs-sub">Outstanding invoices</div>
+              </div>
+              <div class="hero-stat g4">
+                <div class="hs-label">On Duty</div>
+                <div class="hs-value" id="s-duty">—</div>
+                <div class="hs-sub">Staff clocked in</div>
+              </div>
+            </div>
+
+            <div class="sec-label">Quick Actions</div>
+            <div class="qa-grid">
+              <div class="qa-card" onclick="openModal('newOrder')">
+                <div class="qa-icon">📋</div>
+                <div class="qa-label">New Order</div>
+                <div class="qa-sub">Create a new garment order</div>
+              </div>
+              <div class="qa-card" onclick="openModal('newInvoice')">
+                <div class="qa-icon">💳</div>
+                <div class="qa-label">New Invoice</div>
+                <div class="qa-sub">Bill a customer</div>
+              </div>
+              <div class="qa-card" onclick="openModal('clockIn')">
+                <div class="qa-icon">🕐</div>
+                <div class="qa-label">Clock In/Out</div>
+                <div class="qa-sub">Manage staff attendance</div>
+              </div>
+              <div class="qa-card" onclick="showPage('pickup', null)">
+                <div class="qa-icon">🏷️</div>
+                <div class="qa-label">Pickup Portal</div>
+                <div class="qa-sub">Track customer orders</div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="panel">
+                <div class="panel-head">
+                  <span class="panel-title">Recent Orders</span
+                  ><button
+                    class="btn btn-ghost btn-sm"
+                    onclick="showPage('orders', null)"
+                  >
+                    View All →
+                  </button>
+                </div>
+                <div class="tbl-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Item</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody id="db-orders"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-head">
+                  <span class="panel-title">Live Activity</span>
+                </div>
+                <div class="panel-body" id="activity-feed"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ ORDERS ══ -->
+          <div class="page" id="page-orders">
+            <div class="tabs">
+              <div class="tab active" onclick="filterOrders('all', this)">
+                All Orders
+              </div>
+              <div class="tab" onclick="filterOrders('Pending', this)">
+                Pending
+              </div>
+              <div class="tab" onclick="filterOrders('Processing', this)">
+                Processing
+              </div>
+              <div class="tab" onclick="filterOrders('Ready', this)">Ready</div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <span class="panel-title">Orders</span
+                ><button
+                  class="btn btn-lime btn-sm"
+                  onclick="openModal('newOrder')"
+                >
+                  + New Order
+                </button>
+              </div>
+              <div class="tbl-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Item</th>
+                      <th>Service</th>
+                      <th>Status</th>
+                      <th>Assigned</th>
+                      <th>Due</th>
+                      <th>Total</th>
+                      <th>Payment</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orders-tb"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ BILLING ══ -->
+          <div class="page" id="page-billing">
+            <div class="hero-bar" style="grid-template-columns: repeat(3, 1fr)">
+              <div class="hero-stat g1">
+                <div class="hs-label">Total Revenue</div>
+                <div class="hs-value" id="b-rev">₦0</div>
+                <div class="hs-sub">All time</div>
+              </div>
+              <div class="hero-stat g2">
+                <div class="hs-label">Outstanding</div>
+                <div class="hs-value" id="b-out">0</div>
+                <div class="hs-sub">Unpaid invoices</div>
+              </div>
+              <div class="hero-stat g3">
+                <div class="hs-label">Collected</div>
+                <div class="hs-value" id="b-coll">₦0</div>
+                <div class="hs-sub">Paid invoices</div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <span class="panel-title">Invoices</span
+                ><button
+                  class="btn btn-lime btn-sm"
+                  onclick="openModal('newInvoice')"
+                >
+                  + New Invoice
+                </button>
+              </div>
+              <div class="tbl-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Invoice #</th>
+                      <th>Customer</th>
+                      <th>Order</th>
+                      <th>Date</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="billing-tb"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ EMPLOYEES ══ -->
+          <div class="page" id="page-employees">
+            <div class="panel">
+              <div class="panel-head">
+                <span class="panel-title">Staff Directory</span>
+                <div style="display: flex; gap: 0.5rem">
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    onclick="openModal('clockIn')"
+                  >
+                    🕐 Clock In/Out
+                  </button>
+                  <button
+                    class="btn btn-lime btn-sm"
+                    onclick="openModal('newEmployee')"
+                  >
+                    + Add Staff
+                  </button>
+                </div>
+              </div>
+              <div class="emp-grid" id="emp-grid"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <span class="panel-title">Shift Log</span>
+              </div>
+              <div class="tbl-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Clock In</th>
+                      <th>Clock Out</th>
+                      <th>Orders</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="shift-tb"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ INVENTORY ══ -->
+          <div class="page" id="page-inventory">
+            <div class="panel">
+              <div class="panel-head">
+                <span class="panel-title">Supply Inventory</span
+                ><button
+                  class="btn btn-lime btn-sm"
+                  onclick="openModal('newItem')"
+                >
+                  + Add Item
+                </button>
+              </div>
+              <div class="tbl-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Category</th>
+                      <th>Stock</th>
+                      <th>Min Level</th>
+                      <th>Cost</th>
+                      <th>Level</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inv-tb"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ CUSTOMERS ══ -->
+          <div class="page" id="page-customers">
+            <div class="panel">
+              <div class="panel-head">
+                <span class="panel-title">Customers</span
+                ><button
+                  class="btn btn-lime btn-sm"
+                  onclick="openModal('newCustomer')"
+                >
+                  + Add Customer
+                </button>
+              </div>
+              <div class="tbl-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Orders</th>
+                      <th>Spent</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cust-tb"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ PICKUP PORTAL ══ -->
+          <div class="page" id="page-pickup">
+            <div class="portal-center">
+              <div class="portal-hero">
+                <div class="portal-title">ORDER TRACKER</div>
+                <div class="portal-sub">
+                  Enter your Order ID or phone number to check garment status
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    gap: 0.75rem;
+                    margin-top: 1.5rem;
+                    max-width: 420px;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
+                  <input
+                    class="fc"
+                    id="portal-q"
+                    type="text"
+                    placeholder="ORD-001 or 09036954022"
+                    onkeydown="if (event.key === 'Enter') portalSearch();"
+                    style="background: rgba(255, 255, 255, 0.06)"
+                  />
+                  <button class="btn btn-lime" onclick="portalSearch()">
+                    Track →
+                  </button>
+                </div>
+              </div>
+              <div id="portal-result" style="display: none">
+                <div class="panel">
+                  <div class="panel-body">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        margin-bottom: 1rem;
+                      "
+                    >
+                      <div>
+                        <div
+                          style="
+                            font-family: &quot;Bebas Neue&quot;, sans-serif;
+                            font-size: 2rem;
+                            letter-spacing: 0.08em;
+                            color: var(--lime);
+                          "
+                          id="pr-id"
+                        ></div>
+                        <div style="font-size: 0.82rem; color: var(--muted)">
+                          Customer:
+                          <span
+                            id="pr-cust"
+                            style="color: var(--white); font-weight: 600"
+                          ></span>
+                        </div>
+                      </div>
+                      <button
+                        class="btn btn-ghost btn-sm"
+                        onclick="window.print()"
+                      >
+                        🖨️ Print
+                      </button>
+                    </div>
+                    <div class="portal-steps" id="pr-steps"></div>
+                    <div style="margin-top: 1.2rem">
+                      <div class="pd-row">
+                        <span class="pd-label">Item</span
+                        ><span class="pd-val" id="pr-item"></span>
+                      </div>
+                      <div class="pd-row">
+                        <span class="pd-label">Service</span
+                        ><span class="pd-val" id="pr-svc"></span>
+                      </div>
+                      <div class="pd-row">
+                        <span class="pd-label">Due Date</span
+                        ><span class="pd-val" id="pr-due"></span>
+                      </div>
+                      <div class="pd-row">
+                        <span class="pd-label">Total</span
+                        ><span
+                          class="pd-val"
+                          id="pr-total"
+                          style="color: var(--lime)"
+                        ></span>
+                      </div>
+                      <div class="pd-row">
+                        <span class="pd-label">Payment</span
+                        ><span class="pd-val" id="pr-paid"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                id="portal-err"
+                style="
+                  display: none;
+                  color: var(--pink);
+                  text-align: center;
+                  padding: 1.2rem;
+                  background: rgba(255, 45, 120, 0.08);
+                  border: 1px solid rgba(255, 45, 120, 0.2);
+                  border-radius: 12px;
+                "
+              >
+                No order found. Check the order ID or phone number and try
+                again.
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ REPORTS ══ -->
+          <div class="page" id="page-reports">
+            <div class="hero-bar">
+              <div class="hero-stat g1">
+                <div class="hs-label">Total Revenue</div>
+                <div class="hs-value" id="rp-rev">₦0</div>
+                <div class="hs-sub">All orders</div>
+              </div>
+              <div class="hero-stat g2">
+                <div class="hs-label">Completed</div>
+                <div class="hs-value" id="rp-done">0</div>
+                <div class="hs-sub">Ready orders</div>
+              </div>
+              <div class="hero-stat g3">
+                <div class="hs-label">Customers</div>
+                <div class="hs-value" id="rp-cust">0</div>
+                <div class="hs-sub">Total registered</div>
+              </div>
+              <div class="hero-stat g4">
+                <div class="hs-label">Staff</div>
+                <div class="hs-value" id="rp-staff">0</div>
+                <div class="hs-sub">Total employees</div>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="panel">
+                <div class="panel-head">
+                  <span class="panel-title">Revenue by Service</span
+                  ><button class="btn btn-ghost btn-sm" onclick="exportCSV()">
+                    ⬇ Export CSV
+                  </button>
+                </div>
+                <div class="panel-body" id="rev-chart"></div>
+              </div>
+              <div class="panel">
+                <div class="panel-head">
+                  <span class="panel-title">Order Status Breakdown</span>
+                </div>
+                <div class="panel-body" id="status-chart"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /main -->
+      </div>
+      <!-- /app -->
+
+      <!-- ══ MODALS ══ -->
+
+      <!-- New Order -->
+      <div class="overlay" id="modal-newOrder">
+        <div class="modal">
+          <div class="modal-head">
+            <span class="modal-title">New Order</span
+            ><button class="modal-x" onclick="closeModal('newOrder')">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Customer Name</label
+                ><input
+                  class="fc"
+                  id="o-name"
+                  type="text"
+                  placeholder="Full name"
+                />
+              </div>
+              <div class="fg">
+                <label class="fl">Phone</label
+                ><input
+                  class="fc"
+                  id="o-phone"
+                  type="text"
+                  placeholder="09036954022"
+                />
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Service</label>
+                <select class="fc" id="o-service" onchange="calcTotal()">
+                  <option value="">Select...</option>
+                  <option>Dry Cleaning</option>
+                  <option>Laundry</option>
+                  <option>Alterations</option>
+                  <option>Pressing</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label class="fl">Item</label>
+                <select class="fc" id="o-item" onchange="calcTotal()">
+                  <option value="">Select...</option>
+                  <option value="Suit Jacket" data-price="2000">
+                    Suit Jacket — ₦2,000
+                  </option>
+                  <option value="Shirt" data-price="2500">
+                    Shirt — ₦2,500
+                  </option>
+                  <option value="Trousers" data-price="1500">
+                    Trousers — ₦1,500
+                  </option>
+                  <option value="Dress" data-price="8000">
+                    Dress — ₦8,000
+                  </option>
+                  <option value="Coat" data-price="10000">
+                    Coat — ₦5,000
+                  </option>
+                  <option value="Blanket" data-price="8500">
+                    Blanket — ₦8,000
+                  </option>
+                  <option value="Tie" data-price="1000">
+                    Tie — ₦1,000
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Quantity</label
+                ><input
+                  class="fc"
+                  id="o-qty"
+                  type="number"
+                  value="1"
+                  min="1"
+                  onchange="calcTotal()"
+                />
+              </div>
+              <div class="fg">
+                <label class="fl">Due Date</label
+                ><input class="fc" id="o-due" type="date" />
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Assign To</label
+                ><select class="fc" id="o-assign">
+                  <option value="">Unassigned</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label class="fl">Notes</label
+                ><input
+                  class="fc"
+                  id="o-notes"
+                  type="text"
+                  placeholder="Special instructions"
+                />
+              </div>
+            </div>
+            <div class="receipt-box">
+              <div
+                style="
+                  font-size: 0.65rem;
+                  letter-spacing: 0.14em;
+                  text-transform: uppercase;
+                  color: var(--muted);
+                  margin-bottom: 8px;
+                  font-weight: 700;
+                "
+              >
+                Order Summary
+              </div>
+              <div class="rr"><span>Item</span><span id="r-item">—</span></div>
+              <div class="rr">
+                <span>Service</span><span id="r-svc">—</span>
+              </div>
+              <div class="rr">
+                <span>Qty × Price</span><span id="r-calc">—</span>
+              </div>
+              <div class="rr rtot">
+                <span>TOTAL</span><span id="r-total">₦0</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('newOrder')">
+              Cancel
+            </button>
+            <button class="btn btn-lime" id="btn-order" onclick="submitOrder()">
+              Create Order
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Invoice -->
+      <div class="overlay" id="modal-newInvoice">
+        <div class="modal">
+          <div class="modal-head">
+            <span class="modal-title">New Invoice</span
+            ><button class="modal-x" onclick="closeModal('newInvoice')">
+              ✕
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Customer</label
+                ><input class="fc" id="inv-cust" type="text" />
+              </div>
+              <div class="fg">
+                <label class="fl">Order ID</label
+                ><input
+                  class="fc"
+                  id="inv-ord"
+                  type="text"
+                  placeholder="ORD-000"
+                />
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Amount (₦)</label
+                ><input
+                  class="fc"
+                  id="inv-amt"
+                  type="number"
+                  placeholder="0"
+                />
+              </div>
+              <div class="fg">
+                <label class="fl">Due Date</label
+                ><input class="fc" id="inv-due" type="date" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('newInvoice')">
+              Cancel
+            </button>
+            <button class="btn btn-lime" onclick="submitInvoice()">
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Employee -->
+      <div class="overlay" id="modal-newEmployee">
+        <div class="modal">
+          <div class="modal-head">
+            <span class="modal-title">Add Staff Member</span
+            ><button class="modal-x" onclick="closeModal('newEmployee')">
+              ✕
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Full Name</label
+                ><input class="fc" id="em-name" type="text" />
+              </div>
+              <div class="fg">
+                <label class="fl">Role</label
+                ><select class="fc" id="em-role">
+                  <option>Cleaner</option>
+                  <option>Presser</option>
+                  <option>Front Desk</option>
+                  <option>Supervisor</option>
+                  <option>Driver</option>
+                </select>
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Phone</label
+                ><input class="fc" id="em-phone" type="text" />
+              </div>
+              <div class="fg">
+                <label class="fl">Hourly Rate (₦)</label
+                ><input
+                  class="fc"
+                  id="em-rate"
+                  type="number"
+                  placeholder="800"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('newEmployee')">
+              Cancel
+            </button>
+            <button class="btn btn-lime" onclick="submitEmployee()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clock In/Out -->
+      <div class="overlay" id="modal-clockIn">
+        <div class="modal">
+          <div class="modal-head">
+            <span class="modal-title">🕐 Clock In / Out</span
+            ><button class="modal-x" onclick="closeModal('clockIn')">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="fg">
+              <label class="fl">Employee</label
+              ><select class="fc" id="cl-emp"></select>
+            </div>
+            <div class="fg">
+              <label class="fl">Action</label
+              ><select class="fc" id="cl-act">
+                <option value="in">Clock In</option>
+                <option value="out">Clock Out</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('clockIn')">
+              Cancel
+            </button>
+            <button class="btn btn-lime" onclick="submitClock()">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Inventory Item -->
+      <div class="overlay" id="modal-newItem">
+        <div class="modal">
+          <div class="modal-head">
+            <span class="modal-title">Add Inventory Item</span
+            ><button class="modal-x" onclick="closeModal('newItem')">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Item Name</label
+                ><input class="fc" id="it-name" type="text" />
+              </div>
+              <div class="fg">
+                <label class="fl">Category</label
+                ><select class="fc" id="it-cat">
+                  <option>Packaging</option>
+                  <option>Chemicals</option>
+                  <option>Equipment</option>
+                  <option>Tags & Labels</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Quantity</label
+                ><input class="fc" id="it-qty" type="number" placeholder="0" />
+              </div>
+              <div class="fg">
+                <label class="fl">Min Level</label
+                ><input class="fc" id="it-min" type="number" placeholder="0" />
+              </div>
+            </div>
+            <div class="fg">
+              <label class="fl">Unit Cost (₦)</label
+              ><input
+                class="fc"
+                id="it-cost"
+                type="number"
+                placeholder="0"
+              />
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('newItem')">
+              Cancel
+            </button>
+            <button class="btn btn-lime" onclick="submitItem()">
+              Add Item
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Customer -->
+      <div class="overlay" id="modal-newCustomer">
+        <div class="modal">
+          <div class="modal-head">
+            <span class="modal-title">Add Customer</span
+            ><button class="modal-x" onclick="closeModal('newCustomer')">
+              ✕
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="fr">
+              <div class="fg">
+                <label class="fl">Full Name</label
+                ><input class="fc" id="cu-name" type="text" />
+              </div>
+              <div class="fg">
+                <label class="fl">Phone</label
+                ><input class="fc" id="cu-phone" type="text" />
+              </div>
+            </div>
+            <div class="fg">
+              <label class="fl">Email</label
+              ><input class="fc" id="cu-email" type="email" />
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('newCustomer')">
+              Cancel
+            </button>
+            <button class="btn btn-lime" onclick="submitCustomer()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Receipt Modal -->
+      <div class="overlay" id="modal-receipt">
+        <div class="modal" style="max-width: 420px">
+          <div class="modal-head">
+            <span class="modal-title">Receipt</span
+            ><button class="modal-x" onclick="closeModal('receipt')">✕</button>
+          </div>
+          <div
+            class="modal-body"
+            id="receipt-html"
+            style="
+              font-family: &quot;DM Mono&quot;, monospace;
+              font-size: 0.82rem;
+            "
+          ></div>
+          <div class="modal-foot">
+            <button class="btn btn-ghost" onclick="closeModal('receipt')">
+              Close
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="exportTxt()">
+              ⬇ Export
+            </button>
+            <button class="btn btn-lime btn-sm" onclick="printReceipt()">
+              🖨 Print
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/main.js"></script>
+    </body>
+  </html>
