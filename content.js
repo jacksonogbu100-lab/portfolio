@@ -7,32 +7,6 @@ const portfolio = {
     "Strategy, design, and engineering stay in one conversation. The result should be clear for the people using it and solid for the people shipping it.",
     "I'm open to collaborations that need product thinking, interface design, and a full-stack build — from the first brief through to something people can use.",
   ],
-  skills: [
-    {
-      title: "Product Strategy",
-      description:
-        "Product discovery, problem framing, roadmaps, and writing the brief so the team knows what to build and why.",
-      icon: "compass",
-    },
-    {
-      title: "UI/UX Design",
-      description:
-        "Interface design, user flows, prototypes, and design critique for products that feel considered.",
-      icon: "pen",
-    },
-    {
-      title: "Full-Stack Development",
-      description:
-        "JavaScript, React, Node.js, and APIs — building the product, not only the picture of it.",
-      icon: "code",
-    },
-    {
-      title: "Collaboration",
-      description:
-        "Working across product, design, and engineering so decisions survive contact with the build.",
-      icon: "users",
-    },
-  ],
   focuses: [
     { value: "Product", label: "Strategy" },
     { value: "Design", label: "UI / UX" },
@@ -148,10 +122,6 @@ const icons = {
   mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>',
   chevron: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>',
   send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l16-8-6 16-2-6z"/></svg>',
-  compass: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5l-1.2 3.8-3.8 1.2 1.2-3.8z"/></svg>',
-  pen: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4.2-1.1L19 8.1 15.9 5 5.1 15.8z"/><path d="M13.8 7.1l3.1 3.1"/></svg>',
-  code: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg>',
-  users: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-2.6 2.8-4 5.5-4s4.9 1.4 5.5 4"/><circle cx="17" cy="9" r="2.2"/><path d="M16.2 15c1.8.3 3.2 1.4 3.8 4"/></svg>',
 };
 
 function escapeHtml(value) {
@@ -167,18 +137,6 @@ function renderPortfolio() {
   if (!root) return;
 
   const about = portfolio.about.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("");
-
-  const skills = portfolio.skills
-    .map(
-      (skill) => `
-        <article class="skill-card">
-          <div class="skill-icon">${icons[skill.icon] || ""}</div>
-          <h3>${escapeHtml(skill.title)}</h3>
-          <p>${escapeHtml(skill.description)}</p>
-        </article>
-      `
-    )
-    .join("");
 
   const focuses = portfolio.focuses
     .map(
@@ -280,12 +238,9 @@ function renderPortfolio() {
 
       <section class="about" id="about">
         <div class="shell">
-          <div class="about-grid">
-            <div>
-              <h2 class="section-title">About Me</h2>
-              <div class="about-copy">${about}</div>
-            </div>
-            <div class="skill-grid">${skills}</div>
+          <div class="about-copy-wrap">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-copy">${about}</div>
           </div>
           <div class="focus-grid">${focuses}</div>
         </div>

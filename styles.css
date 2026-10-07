@@ -302,7 +302,6 @@ textarea:focus-visible {
 
 h1,
 .section-title,
-.skill-card h3,
 .project-body h3,
 .contact h3,
 .footer h3,
@@ -361,7 +360,10 @@ h1 {
   background: hsl(240 3.7% 15.9% / 0.2);
 }
 
-.about-grid,
+.about-copy-wrap {
+  max-width: 46rem;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -388,28 +390,11 @@ h1 {
   line-height: 1.75;
 }
 
-.skill-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.skill-card,
 .project-card,
 .contact-card {
   background: var(--card);
   border-radius: 0.5rem;
   box-shadow: var(--shadow);
-}
-
-.skill-card {
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.4s ease;
-}
-
-.skill-card:hover {
-  transform: scale(1.04);
 }
 
 .skill-icon {
@@ -424,19 +409,11 @@ h1 {
   color: var(--primary-glow);
 }
 
-.skill-card h3,
 .project-body h3,
 .contact h3 {
   margin: 0 0 0.75rem;
   font-size: 1.15rem;
   font-weight: 600;
-}
-
-.skill-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
 }
 
 .focus-grid {
@@ -678,7 +655,6 @@ textarea {
 }
 
 @media (max-width: 980px) {
-  .about-grid,
   .contact-grid,
   .project-grid,
   .footer-grid {
@@ -701,7 +677,6 @@ textarea {
     justify-content: center;
   }
 
-  .skill-grid,
   .focus-grid,
   .project-grid,
   .name-row,
@@ -729,7 +704,6 @@ textarea {
   .orb-a,
   .orb-b,
   .scroll-cue,
-  .skill-card,
   .project-media img {
     animation: none;
     transition: none;
