@@ -14,7 +14,7 @@ const portfolio = {
     { value: "Launch", label: "Delivery" },
   ],
   projectsIntro:
-    "Working builds are listed first. The last three cards are placeholders.",
+    "Selected work across product, design, and a full build.",
   projects: [
     {
       title: "Naija Dishes",
@@ -76,30 +76,6 @@ const portfolio = {
       linkLabel: "View on GitHub",
       external: true,
       tags: ["JavaScript", "HTML", "CSS", "Fashion"],
-    },
-    {
-      title: "Northline",
-      description:
-        "Shaped a regional transit brief into a phone booking flow with fewer abandoned trips.",
-      image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Strategy", "Design", "Mobile", "User flows"],
-    },
-    {
-      title: "Atelier",
-      description:
-        "Designed and built a small storefront where a ceramics studio can publish work and take orders.",
-      image:
-        "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Design", "Engineering", "React", "Commerce"],
-    },
-    {
-      title: "Fieldnote",
-      description:
-        "Built a research space that keeps interview notes next to the product decisions they changed.",
-      image:
-        "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Strategy", "Engineering", "Research", "Product"],
     },
   ],
   services: [
