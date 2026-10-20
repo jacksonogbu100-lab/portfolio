@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-label="Coat of Arms of Nigeria">
+  <!-- Black shield -->
+  <path d="M40 48 L100 28 L160 48 L160 120 C160 168 132 198 100 212 C68 198 40 168 40 120 Z" fill="#111"/>
+  <!-- White wavy pale (Y shape stylized as river) -->
+  <path d="M100 52 C92 78 78 100 62 118 L74 128 C88 108 96 88 100 68 C104 88 112 108 126 128 L138 118 C122 100 108 78 100 52 Z" fill="#fff"/>
+  <!-- Red eagle -->
+  <g fill="#c8102e">
+    <ellipse cx="100" cy="24" rx="10" ry="7"/>
+    <path d="M100 28 L86 42 L100 36 L114 42 Z"/>
+    <path d="M70 36 L96 32 L96 40 Z"/>
+    <path d="M130 36 L104 32 L104 40 Z"/>
+  </g>
+  <!-- Green wreath / base -->
+  <path d="M52 188 C70 176 88 172 100 172 C112 172 130 176 148 188 C136 204 118 214 100 218 C82 214 64 204 52 188 Z" fill="#008751"/>
+  <path d="M60 190 C76 182 90 180 100 180 C110 180 124 182 140 190 C130 200 116 206 100 208 C84 206 70 200 60 190 Z" fill="#0a5c38"/>
+  <!-- Gold ribbon -->
+  <rect x="48" y="208" width="104" height="16" rx="3" fill="#d4a017"/>
+  <text x="100" y="219" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#1a1405" letter-spacing="1">UNITY AND FAITH</text>
+</svg>

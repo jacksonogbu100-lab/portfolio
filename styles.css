@@ -1,5 +1,5 @@
 :root {
-  --bg: hsl(240 10% 3.9%);
+  --bg: hsl(142 48% 24%);
   --fg: hsl(0 0% 98%);
   --muted: hsl(240 5% 64.9%);
   --muted-bg: hsl(240 3.7% 15.9%);
@@ -85,7 +85,7 @@ section {
 
 .nav.is-scrolled,
 .nav.is-open {
-  background: hsl(240 10% 3.9% / 0.96);
+  background: hsl(142 48% 24% / 0.96);
   backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px hsl(240 10% 3.9% / 0.45);
 }

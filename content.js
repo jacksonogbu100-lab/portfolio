@@ -17,6 +17,36 @@ const portfolio = {
     "Selected work across product, design, and a full build.",
   projects: [
     {
+      title: "AetherOps",
+      description:
+        "An autonomous AI agent platform that plans tasks, uses tools, writes code, and completes business workflows with limited human intervention.",
+      image: "images/aetherops.jpg",
+      alt: "AetherOps AI Workflow Command Center dashboard with routing map, agent health, and approvals",
+      href: "aetherops/",
+      linkLabel: "View the site",
+      tags: ["LLMs", "Python", "APIs", "Agents"],
+    },
+    {
+      title: "Army Aptitude",
+      description:
+        "A timed practice test for Nigerian Army screening. Forty questions across numerical, verbal, abstract, and general knowledge, then a scored result sheet.",
+      image: "images/army-aptitude-class.jpg",
+      alt: "A classroom of cadets in orange camouflage writing at their desks",
+      href: "army-aptitude/",
+      linkLabel: "View the site",
+      tags: ["HTML", "CSS", "JavaScript", "Nigeria"],
+    },
+    {
+      title: "SSIMS",
+      description:
+        "Student records, academics, and fees for NACEST in Makurdi. Students see their own file. Registrars and admins manage the rest.",
+      image: "images/ssims-graduates.jpg",
+      alt: "Graduates in black and yellow gowns throwing their caps on the lawn in front of a campus building",
+      href: "ssims/",
+      linkLabel: "View the site",
+      tags: ["HTML", "CSS", "JavaScript", "Education"],
+    },
+    {
       title: "Naija Dishes",
       description:
         "A menu for the Gwarinpa and Jahi kitchens in Abuja. Browse soups, swallow, and rice, then send the cart on WhatsApp.",
@@ -353,4 +383,9 @@ function renderPortfolio() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", renderPortfolio);
+document.addEventListener("DOMContentLoaded", () => {
+  renderPortfolio();
+  if (!location.hash) return;
+  const target = document.querySelector(location.hash);
+  if (target) target.scrollIntoView();
+});

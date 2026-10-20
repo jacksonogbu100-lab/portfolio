@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NAAPT — Nigerian Army Aptitude Practice Tests</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <!-- LANDING -->
+    <section class="screen active" id="screen-landing">
+      <header class="site-header">
+        <div class="logo">
+          <img
+            class="nigeria-arms"
+            src="assets/nigeria-coat-of-arms.svg"
+            alt="Coat of Arms of Nigeria"
+            width="56"
+            height="68"
+          />
+          <img
+            class="nigeria-flag"
+            src="assets/nigeria-flag.svg"
+            alt="Flag of Nigeria"
+            width="64"
+            height="42"
+          />
+          <span class="logo-text">
+            <strong>Federal Republic of Nigeria</strong>
+            <small>Nigerian Army · Aptitude Practice Portal</small>
+          </span>
+        </div>
+        <span class="pill">Unofficial practice tool</span>
+      </header>
+
+      <div class="nation-banner" aria-hidden="true">
+        <span class="stripe green"></span>
+        <span class="stripe white"></span>
+        <span class="stripe green"></span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-crest">
+          <img
+            src="assets/nigeria-coat-of-arms.svg"
+            alt="Coat of Arms of Nigeria"
+            width="110"
+            height="132"
+          />
+        </div>
+        <p class="eyebrow">Nigerian Army · Recruitment preparation</p>
+        <h1>Online aptitude<br />practice test</h1>
+        <p class="hero-lead">
+          Timed mock assessment covering numerical reasoning, verbal ability,
+          abstract logic, and general knowledge — built to help candidates
+          prepare for Nigerian Army entrance screening.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="btn-start-flow">Begin assessment</button>
+          <button class="btn btn-ghost" id="btn-how-it-works">How it works</button>
+        </div>
+        <ul class="hero-meta">
+          <li><strong>40</strong> questions</li>
+          <li><strong>40</strong> minutes</li>
+          <li><strong>4</strong> sections</li>
+        </ul>
+      </div>
+
+      <div class="info-strip" id="how-it-works">
+        <article>
+          <h3>01 · Register</h3>
+          <p>Enter candidate details. No account required for this practice version.</p>
+        </article>
+        <article>
+          <h3>02 · Sit the test</h3>
+          <p>Answer under a live countdown. You can navigate between questions freely.</p>
+        </article>
+        <article>
+          <h3>03 · Review score</h3>
+          <p>Get section breakdowns and see which answers were correct or wrong.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CANDIDATE FORM -->
+    <section class="screen" id="screen-form">
+      <div class="brand-row">
+        <img src="assets/nigeria-coat-of-arms.svg" alt="Coat of Arms of Nigeria" width="48" height="58" />
+        <img src="assets/nigeria-flag.svg" alt="Flag of Nigeria" width="54" height="36" />
+        <span>Federal Republic of Nigeria</span>
+      </div>
+      <div class="panel panel-narrow">
+        <p class="eyebrow">Candidate intake</p>
+        <h2>Enter your details</h2>
+        <p class="muted">Used only to personalise your result sheet in this browser.</p>
+        <form id="candidate-form" class="form">
+          <label>
+            Full name
+            <input id="c-name" type="text" required placeholder="e.g. Chinedu Okafor" />
+          </label>
+          <label>
+            Application / form number
+            <input id="c-form" type="text" required placeholder="e.g. NA-2026-00421" />
+          </label>
+          <label>
+            State of origin
+            <input id="c-state" type="text" required placeholder="e.g. Enugu" />
+          </label>
+          <label>
+            Preferred arm / corps (optional)
+            <select id="c-corps">
+              <option value="">Select…</option>
+              <option>Infantry</option>
+              <option>Artillery</option>
+              <option>Armour</option>
+              <option>Engineers</option>
+              <option>Signals</option>
+              <option>Intelligence</option>
+              <option>Medical</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" data-go="landing">Back</button>
+            <button type="submit" class="btn btn-primary">Continue to briefing</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- BRIEFING -->
+    <section class="screen" id="screen-brief">
+      <div class="brand-row">
+        <img src="assets/nigeria-coat-of-arms.svg" alt="Coat of Arms of Nigeria" width="48" height="58" />
+        <img src="assets/nigeria-flag.svg" alt="Flag of Nigeria" width="54" height="36" />
+        <span>Federal Republic of Nigeria</span>
+      </div>
+      <div class="panel panel-narrow">
+        <p class="eyebrow">Exam briefing</p>
+        <h2>Read before you start</h2>
+        <ul class="rules">
+          <li>Total time: <strong>40 minutes</strong> for all sections.</li>
+          <li>Sections: Numerical, Verbal, Abstract, General Knowledge.</li>
+          <li>Each question has one correct answer. No negative marking.</li>
+          <li>The timer starts when you click <em>Start test</em>.</li>
+          <li>Do not refresh the page mid-test or your progress may be lost.</li>
+        </ul>
+        <div class="candidate-chip" id="brief-candidate"></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" data-go="form">Back</button>
+          <button type="button" class="btn btn-primary" id="btn-start-test">Start test</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEST -->
+    <section class="screen" id="screen-test">
+      <header class="test-bar">
+        <div class="test-brand">
+          <img src="assets/nigeria-flag.svg" alt="Flag of Nigeria" width="40" height="26" />
+          <div>
+            <strong id="section-label">Numerical Reasoning</strong>
+            <span class="muted" id="progress-label">Question 1 of 40</span>
+          </div>
+        </div>
+        <div class="timer" id="timer" aria-live="polite">40:00</div>
+      </header>
+
+      <div class="test-layout">
+        <aside class="q-nav panel">
+          <p class="nav-title">Question map</p>
+          <div class="q-grid" id="q-grid"></div>
+          <button class="btn btn-danger btn-block" id="btn-submit-test">Submit test</button>
+        </aside>
+
+        <div class="panel question-panel">
+          <p class="q-section" id="q-section-tag"></p>
+          <h2 class="q-text" id="q-text"></h2>
+          <div class="options" id="q-options"></div>
+          <div class="q-actions">
+            <button class="btn btn-ghost" id="btn-prev">Previous</button>
+            <button class="btn btn-primary" id="btn-next">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="screen" id="screen-results">
+      <div class="brand-row">
+        <img src="assets/nigeria-coat-of-arms.svg" alt="Coat of Arms of Nigeria" width="48" height="58" />
+        <img src="assets/nigeria-flag.svg" alt="Flag of Nigeria" width="54" height="36" />
+        <span>Federal Republic of Nigeria</span>
+      </div>
+      <div class="panel">
+        <p class="eyebrow">Result sheet</p>
+        <h2 id="result-title">Assessment complete</h2>
+        <p class="muted" id="result-sub"></p>
+
+        <div class="score-hero">
+          <div>
+            <span class="score-label">Overall score</span>
+            <div class="score-big" id="score-big">0%</div>
+          </div>
+          <div class="score-meta" id="score-meta"></div>
+        </div>
+
+        <div class="section-scores" id="section-scores"></div>
+
+        <div class="review-wrap">
+          <h3>Answer review</h3>
+          <div id="review-list"></div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-ghost" id="btn-retake">Retake practice test</button>
+          <button class="btn btn-primary" id="btn-home">Back to home</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      Practice portal only — not an official Nigerian Army recruitment website.
+    </footer>
+
+    <script src="js/questions.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
