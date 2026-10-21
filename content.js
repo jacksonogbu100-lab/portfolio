@@ -17,6 +17,16 @@ const portfolio = {
     "Selected work across product, design, and a full build.",
   projects: [
     {
+      title: "Hearth",
+      description:
+        "A real-time community platform for instant messaging, voice and video calls, presence, notifications, and moderation, with large communities running at the same time.",
+      image: "images/hearth.jpg",
+      alt: "Hearth voice room during story hour, with speaker cards, an audience grid, and a live voice connection",
+      href: "hearth/index.html",
+      linkLabel: "View the site",
+      tags: ["Realtime", "Voice", "JavaScript", "Communities"],
+    },
+    {
       title: "Meridian",
       description:
         "An API gateway and developer platform for authentication, rate limits, traffic routing, service discovery, monitoring, and usage billing.",
