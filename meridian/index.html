@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meridian — API Gateway &amp; Developer Platform</title>
+    <meta
+      name="description"
+      content="Meridian provides API authentication, rate limiting, traffic routing, service discovery, monitoring, and usage billing."
+    />
+    <meta name="theme-color" content="#0e1116" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111827'/%3E%3Cpath d='M6 25V13L16 6l10 7v12' fill='none' stroke='%232dd4bf' stroke-width='1.8'/%3E%3Cpath d='M12 25v-7h8v7' fill='none' stroke='%232dd4bf' stroke-width='1.8'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="app">
+      <aside class="sidebar" aria-label="Primary">
+        <a class="brand" href="#monitor">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <path d="M6 25V13L16 6l10 7v12" />
+              <path d="M12 25v-7h8v7" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <strong>Meridian</strong>
+            <small>Developer Platform</small>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Platform">
+          <a class="nav-item" href="#monitor" data-view="monitor">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h3l2.2-5.5L13 18l2.2-6H20" /></svg>
+            Monitor
+          </a>
+          <a class="nav-item" href="#routes" data-view="routes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h5v5H6zM13 13h5v5h-5zM8.5 11v2.5H13" /></svg>
+            Routes
+          </a>
+          <a class="nav-item" href="#services" data-view="services">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.2" /><circle cx="17" cy="7" r="2.2" /><circle cx="17" cy="17" r="2.2" /><path d="M8.1 12h6.2M15.2 8.7 8.6 11.2M15.2 15.3 8.6 12.8" /></svg>
+            Services
+          </a>
+          <a class="nav-item" href="#consumers" data-view="consumers">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="3" /><path d="M11 12h9M16 12v2.2M18.5 12v2.2" /></svg>
+            Consumers
+          </a>
+          <a class="nav-item" href="#limits" data-view="limits">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16.5a7 7 0 0 1 14 0" /><path d="M12 16.5 16.2 11" /></svg>
+            Limits
+          </a>
+          <a class="nav-item" href="#billing" data-view="billing">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16l-2.5-1.6L12 20l-2.5-1.6L7 20z" /><path d="M9.5 9h5M9.5 12.5h5" /></svg>
+            Billing
+          </a>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="status-pill">
+            <span class="pulse" aria-hidden="true"></span>
+            Proxy healthy
+          </div>
+          <p class="foot-meta">prod-lagos-1 · edge</p>
+        </div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">API Gateway &amp; Developer Platform</p>
+            <h1 id="view-title">Gateway monitor</h1>
+          </div>
+          <div class="cluster-chip">
+            <span class="pulse" aria-hidden="true"></span>
+            prod-lagos-1
+          </div>
+        </header>
+        <main id="content"></main>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

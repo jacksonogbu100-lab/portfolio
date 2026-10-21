@@ -17,6 +17,16 @@ const portfolio = {
     "Selected work across product, design, and a full build.",
   projects: [
     {
+      title: "Meridian",
+      description:
+        "An API gateway and developer platform for authentication, rate limits, traffic routing, service discovery, monitoring, and usage billing.",
+      image: "images/meridian.jpg",
+      alt: "Meridian gateway monitor with request totals, service bars, status codes, and a live edge log",
+      href: "meridian/",
+      linkLabel: "View the site",
+      tags: ["APIs", "Gateway", "JavaScript", "Platform"],
+    },
+    {
       title: "AetherOps",
       description:
         "An autonomous AI agent platform that plans tasks, uses tools, writes code, and completes business workflows with limited human intervention.",
