@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kinora — Video platform</title>
+    <meta
+      name="description"
+      content="Kinora is a video platform for uploads, transcoding, live streaming, recommendations, copyright checks, and delivery from edges around the world."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23171717'/%3E%3Cpath d='M13 10.5v11l9-5.5-9-5.5z' fill='%23ff7a1a'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=2" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="app" id="app">
+      <header class="top" id="top"></header>
+      <div class="frame">
+        <nav class="guide" id="guide" aria-label="Sections"></nav>
+        <button class="scrim" type="button" data-act="close-guide" aria-label="Close menu"></button>
+        <main id="content" tabindex="-1"></main>
+      </div>
+    </div>
+    <input id="file-input" type="file" accept="video/*" hidden />
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js?v=7"></script>
+  </body>
+</html>
